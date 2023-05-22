@@ -1,32 +1,21 @@
-import random
+from random import choice
 
 DNALETTERS = "ACGT"
+dna_to_rna = {'A':'U',
+              'C':'G',
+              'G':'C',
+              'T':'A'}
 
 def generate_random_DNA(length: int) -> str:
-    random_sequence:str = ''.join(random.choice(DNALETTERS) for i in range(length))
+    random_sequence:str = ''.join(choice(DNALETTERS) for i in range(length))
     return random_sequence
 
 def irna_tor(DnaInput: str) -> str:
     DnaInput.split().pop()
-    RnaOutput: str = ""
+    RNAOutput: str = ''.join([dna_to_rna.get(nucleotide) for nucleotide in DnaInput])
+    return RNAOutput
 
-    for nucleotide in UpperCasedDNA:
-        if nucleotide == "A":
-            RnaOutput += "U"
-
-        if nucleotide == "C":
-            RnaOutput += "G"
-
-        if nucleotide == "G":
-            RnaOutput += "C"
-
-        if nucleotide == "T":
-            RnaOutput += "A"
-
-
-    return RnaOutput
-
-DnaSequence: str = generate_random_DNA(100)
+DnaSequence: str = generate_random_DNA(5)
 
 UpperCasedDNA: str = DnaSequence.upper()
 
