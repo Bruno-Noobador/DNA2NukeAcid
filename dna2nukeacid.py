@@ -74,34 +74,33 @@ rna_to_aminoacid = {'UUU': 'Phe',
                     'GGA': 'Gly',
                     'GGG': 'Gly'}
 
-def generate_random_DNA(length: int) -> str:
-    random_sequence:str = ''.join(choice(DNALETTERS) for i in range(length*3))
-    return random_sequence
-
 def irna_tor(DnaInput: str) -> str:
     DnaInput.split().pop()
-    RNAOutput: str = ''.join([dna_to_rna.get(nucleotide) for nucleotide in DnaInput])
-    return RNAOutput
+    rna_output: str = ''.join([dna_to_rna.get(nucleotide) for nucleotide in DnaInput])
+    return rna_output
 
 def amino_acid_inator(RnaInput: str) -> str:
-    ProperlySeparatedRNA = []
+    properly_separated_rna = []
     for n in range(0, len(RnaInput), 3):
-        ProperlySeparatedRNA.append(''.join(RnaInput[n:n+3]))
+        properly_separated_rna.append(''.join(RnaInput[n:n+3]))
     
-    print(f"ProperlySeparatedRNA: {ProperlySeparatedRNA}")
+    print(f"ProperlySeparatedRNA: {properly_separated_rna}")
 
-    AminoacidOutput: str = ' '.join([rna_to_aminoacid.get(aminoacid) for aminoacid in ProperlySeparatedRNA])
-    return AminoacidOutput
+    aminoacid_output: str = ' '.join([rna_to_aminoacid.get(aminoacid) for aminoacid in properly_separated_rna])
+    return aminoacid_output
 
-DnaSequence: str = generate_random_DNA(10)
+dna_sequence: str = ""
 
-UpperCasedDNA: str = DnaSequence.upper()
+with open("DNA_Input.txt") as input_file:
+    dna_sequence = input_file.read()
 
-print(f"DnaSequence: {UpperCasedDNA}")
+upper_cased_dna: str = dna_sequence.upper()
 
-RnaSequence: str = irna_tor(UpperCasedDNA)
+print(f"DnaSequence: {upper_cased_dna}")
 
-print(f"RnaSequence: {RnaSequence}")
+rna_sequence: str = irna_tor(upper_cased_dna)
 
-NucleicAcids:str = amino_acid_inator(RnaSequence)
-print(f"NucleicAcids: {NucleicAcids}")
+print(f"rna_sequence: {rna_sequence}")
+
+aminoacids:str = amino_acid_inator(rna_sequence)
+print(f"Aminoacids: {aminoacids}")
